@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\RepNotificationEvent;
 use App\Models\Answer;
 use App\Models\Customer;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class AnswersController extends Controller
 {
@@ -36,6 +39,14 @@ class AnswersController extends Controller
                         'question_id'=>$answer['quiz_id'],
                         'value'=>$answer['value']
                     ]);
+                }
+                $rating=array_column($validated['answers'], 'value');
+                $average=array_sum($rating)/count($rating);
+
+                if ($average<3){
+
+                    $user=User::latest()->first();
+                    RepNotificationEvent::dispatch($user,$customer);
                 }
             }
         });

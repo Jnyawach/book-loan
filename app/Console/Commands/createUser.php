@@ -30,7 +30,8 @@ class createUser extends Command
         //
         $name=$this->ask('What is your name?');
         $email=$this->ask('What is your email?');
-        $password=$this->ask('Provide a password');
+        $phone=$this->ask('What is your phone number?');
+        $password=$this->secret('Provide a password');
 
         $user=User::where('email', $email)->first();
         if ($user){
@@ -40,6 +41,7 @@ class createUser extends Command
         User::create([
             'name'=>$name,
             'email'=>$email,
+            'cellphone'=>$phone,
             'password'=>Hash::make($password)
         ]);
         $this->info('User has been successfully created');

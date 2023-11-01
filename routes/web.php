@@ -21,11 +21,12 @@ Route::post('/answers/save',[\App\Http\Controllers\AnswersController::class,'sav
 //Auth routes
 
 Route::group([], function (){
-    Route::get('auth/login',[AuthController::class,'login']);
+    Route::get('auth/login',[AuthController::class,'login'])->name('login');
     Route::post('auth/authenticate',[AuthController::class,'authenticate']);
 });
 
 Route::group(['middleware'=>'auth'], function (){
+    Route::get('test-mail',[DashboardController::class, 'testMail']);
     Route::get('dashboard/questions/show/{id}', [DashboardController::class, 'show']);
     Route::get('dashboard/questions', [DashboardController::class, 'question']);
     Route::get('dashboard/customers', [DashboardController::class, 'customer']);

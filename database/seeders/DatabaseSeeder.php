@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         foreach ($customers as $customer){
             $question=Question::all();
             foreach ($question as $quiz){
-                $customer->answer()->create([
+                $customer->answers()->create([
                     'value'=>fake()->numberBetween(1,5),
                     'question_id'=>$quiz->id
                 ]);

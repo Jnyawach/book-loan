@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Resources\CustomerResource;
 use App\Http\Resources\QuestionResource;
+use App\Mail\SendReviewEmail;
 use App\Models\Customer;
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
@@ -67,5 +69,12 @@ class DashboardController extends Controller
        $filters=request()->only('search','showing','rating');
        return inertia::render('dashboard/quiz-show',
        compact('question','filters','customers'));
+   }
+
+   public function testMail(){
+       $user=User::latest()->first();
+       $customer=Customer::latest()->first();
+       return new SendReviewEmail($user, $customer);
+
    }
 }
