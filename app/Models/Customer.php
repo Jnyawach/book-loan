@@ -12,6 +12,7 @@ class Customer extends Model
     protected $fillable=['name','email','phone'];
 
     public function answers(){
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Answer::class)
+            ->distinct('question_id');
     }
 }

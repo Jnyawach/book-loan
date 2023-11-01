@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,5 +21,14 @@ Route::post('/answers/save',[\App\Http\Controllers\AnswersController::class,'sav
 //Auth routes
 
 Route::group([], function (){
-    Route::get('/login',[AuthController::class,'login']);
+    Route::get('auth/login',[AuthController::class,'login']);
+    Route::post('auth/authenticate',[AuthController::class,'authenticate']);
+});
+
+Route::group(['middleware'=>'auth'], function (){
+    Route::get('dashboard/questions/show/{id}', [DashboardController::class, 'show']);
+    Route::get('dashboard/questions', [DashboardController::class, 'question']);
+    Route::get('dashboard/customers', [DashboardController::class, 'customer']);
+    Route::get('dashboard', [DashboardController::class, 'dashboard']);
+
 });
