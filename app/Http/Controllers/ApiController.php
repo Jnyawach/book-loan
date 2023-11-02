@@ -35,20 +35,21 @@ class ApiController extends Controller
     public function dailyRating(Request $request){
         $start=Carbon::parse($request->start)->startOfDay();
         $end=Carbon::parse($request->end)->endOfDay();
-      $working_days=$this->workingDays($start,$end);
 
         $answers=Answer::query()
-            ->whereDate()
-            ->whereBetween('created_at',[$request->start,$request->end])
-        ->select('created_at','customer_id','id')->get()->groupBy('created_at');
-        dd($answers);
+            ->whereBetween('created_at',[$start,$end])
+        ->select('created_at','customer_id','id',DB::raw('DATE(created_at) as date'))->get()->groupBy('date');
+
         $customers=[];
+
         foreach ($answers as $key=>$answer){
             $reply=$answer->groupBy('customer_id')->count();
-            $customers[Carbon::parse($key)->format('D j')]=[
+            $entry=[
                 'day'=>Carbon::parse($key)->format('D j'),
                 'data'=>$reply
             ];
+            $customers[]=$entry;
+
         }
         return $customers;
     }

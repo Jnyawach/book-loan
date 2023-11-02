@@ -16,7 +16,7 @@ const rating=ref({
 )
 const options=computed(()=>({
     labels:rating.value.label,
-    colors: ['#dc2626', '#eab308','#4d7c0f'],
+    colors: ['#0284c7', '#075985','#082f49'],
     legend:{
         position: 'bottom',
     }
@@ -40,11 +40,8 @@ onMounted(async ()=>{
 <template>
     <card>
         <template #header>
-            <div class="flex justify-between items-center">
-                <div>
-
-                    <h6 class="text-md font-bold text-sky-600">Leases</h6>
-                </div>
+            <div class="flex justify-between items-center h-full">
+                <h6 class="text-md font-bold self-center">Leases</h6>
 
             </div>
         </template>

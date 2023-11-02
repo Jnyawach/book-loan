@@ -69,15 +69,15 @@ const logout=()=>{
                 </div>
                 <div class="py-3">
                     <h6 class="text-gray-600 font-medium text-sm">Role</h6>
-                    <h2 class="text-xl font-black text-sky-700">Admin</h2>
+                    <h2 class="text-xl font-bold text-sky-700">Sales rep</h2>
                 </div>
             </div>
             <ul class="space-y-2 font-medium pt-3 min-h-[45vh] border-b border-gray-300 text-sm">
                 <li>
                     <Link href="/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-sky-700  hover:bg-gray-100 group"
-                          :class="{ 'bg-gray-100 text-sky-700': $page.component === '/dashboard' }"
+                          :class="{ 'bg-gray-100 text-sky-700': $page.component === 'dashboard/index' }"
                     >
-                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === '/dashboard' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === 'dashboard/index' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path d="M488 392H251.9C241.7 359.6 211.8 336 176 336s-65.69 23.62-75.93 56H24C10.75 392 0 402.7 0 416s10.75 24 24 24h76.07C110.3 472.4 140.2 496 176 496s65.69-23.62 75.93-56H488c13.25 0 24-10.75 24-24S501.3 392 488 392zM176 448c-17.64 0-32-14.36-32-32s14.36-32 32-32s32 14.36 32 32S193.6 448 176 448zM488 232h-76.07C401.7 199.6 371.8 176 336 176s-65.69 23.62-75.93 56H24C10.75 232 0 242.7 0 256s10.75 24 24 24h236.1C270.3 312.4 300.2 336 336 336s65.69-23.62 75.93-56H488C501.3 280 512 269.3 512 256S501.3 232 488 232zM336 288c-17.64 0-32-14.36-32-32s14.36-32 32-32s32 14.36 32 32S353.6 288 336 288zM24 120h108.1C142.3 152.4 172.2 176 208 176s65.69-23.62 75.93-56H488C501.3 120 512 109.3 512 96s-10.75-24-24-24h-204.1C273.7 39.62 243.8 16 208 16S142.3 39.62 132.1 72H24C10.75 72 0 82.75 0 96S10.75 120 24 120zM208 64c17.64 0 32 14.36 32 32s-14.36 32-32 32s-32-14.36-32-32S190.4 64 208 64z"/>
                         </svg>
                         <span class="ml-3">Dashboard</span>
@@ -97,10 +97,10 @@ const logout=()=>{
 
                 <li>
                     <Link href="/dashboard/questions" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-sky-700  hover:bg-gray-100 group"
-                          :class="{ 'bg-gray-100 text-sky-700': $page.component === '/dashboard/questions' }"
+                          :class="{ 'bg-gray-100 text-sky-700': $page.component === 'dashboard/questions' }"
                     >
 
-                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === '/dashboard/questions' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
+                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === 'dashboard/questions' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" >
                             <path d="M17 2V4H20.0066C20.5552 4 21 4.44495 21 4.9934V21.0066C21 21.5552 20.5551 22 20.0066 22H3.9934C3.44476 22 3 21.5551 3 21.0066V4.9934C3 4.44476 3.44495 4 3.9934 4H7V2H17ZM7 6H5V20H19V6H17V8H7V6ZM9 16V18H7V16H9ZM9 13V15H7V13H9ZM9 10V12H7V10H9ZM15 4H9V6H15V4Z"></path>
                         </svg>
                         <span class="ml-3">Question Ratings</span>

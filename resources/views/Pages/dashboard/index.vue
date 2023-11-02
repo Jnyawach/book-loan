@@ -4,6 +4,10 @@ import MainLayout from "@/views/layouts/main-layout.vue";
 import {Head,Link} from "@inertiajs/vue3";
 import DonutChart from "@/views/components/donut-chart.vue";
 import LineChart from "@/views/components/line-chart.vue";
+defineProps({
+    customer:Number,
+    rating:String
+})
 </script>
 
 <template>
@@ -24,7 +28,7 @@ import LineChart from "@/views/components/line-chart.vue";
                     <h2 class="text-lg font-bold">Total Respondents</h2>
                     <Link href="/dashboard/customers" class="btn-simple btn-medium">view</Link>
                 </div>
-                <h1 class="text-5xl font-bold text-sky-800 my-3">300</h1>
+                <h1 class="text-5xl font-bold text-sky-800 my-3">{{customer}}</h1>
             </div>
         </div>
     </div>
@@ -41,17 +45,17 @@ import LineChart from "@/views/components/line-chart.vue";
                     <h2 class="text-lg font-bold">Average rating</h2>
                     <Link href="/dashboard/customers" class="btn-simple btn-medium">view</Link>
                 </div>
-                <h1 class="text-5xl font-bold text-sky-800 my-3">3.5/5</h1>
+                <h1 class="text-5xl font-bold text-sky-800 my-3">{{rating}}/5</h1>
             </div>
         </div>
     </div>
 </div>
     <!--charts-->
     <div class="grid grid-cols-6 gap-2 my-5">
-        <div class="col-span-2">
+        <div class="col-span-2 grid">
             <donut-chart></donut-chart>
         </div>
-        <div class="col-span-4">
+        <div class="col-span-4 grid">
             <line-chart></line-chart>
         </div>
     </div>

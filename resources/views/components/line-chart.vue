@@ -2,7 +2,7 @@
 
 import {Link, usePage} from "@inertiajs/vue3";
 import apexchart from "vue3-apexcharts";
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import Card from "@/views/components/card.vue";
 import axios from "axios";
 import moment from "moment";
@@ -16,7 +16,7 @@ const options=computed(()=>({
     chart: {
         id: 'Daily Customer Response'
     },
-    colors:'#182E50'
+    colors:'#075985'
 }))
 const customers=ref([])
 const series=computed(()=>([
@@ -36,7 +36,7 @@ const getEarnings= async ()=>{
             end:end.value
         }
     }).then((response)=>{
-        console.log(response.data)
+
         customers.value=response.data
         rateLoading.value=false
     }).catch((e)=>console.log(e))
@@ -45,6 +45,7 @@ onMounted(()=>{
     getEarnings()
 })
 
+watch([start, end],()=>getEarnings())
 </script>
 
 <template>
@@ -70,7 +71,7 @@ onMounted(()=>{
             </div>
             <div v-else>
 
-                <apexchart height="300"  type="bar" :options="options" :series="series"></apexchart>
+                <apexchart height="250"  type="bar" :options="options" :series="series"></apexchart>
             </div>
 
         </div>

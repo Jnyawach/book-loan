@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Resources\CustomerResource;
 use App\Http\Resources\QuestionResource;
 use App\Mail\SendReviewEmail;
+use App\Models\Answer;
 use App\Models\Customer;
 use App\Models\Question;
 use App\Models\User;
@@ -16,7 +17,11 @@ class DashboardController extends Controller
 {
     //
    public function dashboard(){
-       return inertia::render('dashboard/index');
+       $customer=Customer::whereHas('answers')->count();
+       $rating=Answer::average('value');
+       $rating=number_format($rating,1);
+       return inertia::render('dashboard/index',
+       compact('customer','rating'));
    }
 
    public function customer(){

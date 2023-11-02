@@ -6,6 +6,7 @@ use App\Events\RepNotificationEvent;
 use App\Mail\SendReviewEmail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use AfricasTalking\SDK\AfricasTalking;
 
@@ -46,6 +47,8 @@ class RepNotificationListener
             'message' => $message,
             'from'=>'Company X'
         ]);
+
+
 
         //Send email
         Mail::to($user)->send(new SendReviewEmail($user,$customer));
