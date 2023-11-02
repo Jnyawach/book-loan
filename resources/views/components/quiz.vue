@@ -22,6 +22,14 @@ const submitReview=(review:number)=>{
 </script>
 
 <template>
+    <Transition
+        enter-from-class="opacity-0 scale-125"
+        enter-to-class="opacity-100 scale-100"
+        enter-active-class="transition duration-300"
+        leave-active-class="transition duration-200"
+        leave-from-class="opacity-100 scale-100"
+        leave-to-class="opacity-0 scale-125"
+    >
 <div class="p-3" v-if="index===currentQuiz">
     <h2 class="text-2xl ">Quiz {{index+1}} of 3 : {{question.quiz}}</h2>
     <div class="my-8 flex justify-center ">
@@ -49,6 +57,7 @@ const submitReview=(review:number)=>{
      </div>
     </div>
 </div>
+    </Transition>
 </template>
 
 <style scoped>

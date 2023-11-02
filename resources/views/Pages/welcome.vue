@@ -39,7 +39,7 @@ const resetForm = () => {
         <div>
             <h1 class="text-lg font-bold text-sky-600">COMPANY X</h1>
         </div>
-        <div>
+        <div v-if="!$page.props.auth">
             <Link href="/auth/login" title="Login" class="bg-sky-600 py-2 px-5 rounded-lg border
             border-sky-700 text-white hover:bg-sky-700 duration-300 transition-colors flex gap-2 items-center group">
                 <svg class="h-5 fill-white" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -53,9 +53,13 @@ const resetForm = () => {
     <section>
         <div class="mx-auto max-w-[1280px] my-10 md:px-14 px-3">
             <div>
-                <h1 class="text-2xl font-bold text-center text-sky-600">This is a marketing Survey. No personal data will be stored</h1>
-            <div class="my-8 text-center flex justify-center ">
+                <p class="text-md">This marketing survey is being conducted for research and promotional purposes.
+                    Your participation in this survey is entirely voluntary, and you have the option
+                    to decline participation or discontinue at any point. Your responses will remain confidential
+                    and will be used solely for statistical analysis and market research.</p>
+            <div class="my-8 text-center flex justify-center bg-white shadow py-5 rounded-xl">
                 <div v-if="currentQuiz===3" class="w-1/2">
+                    <h6 class="text-sky-700 my-2">We will use this details to get back to you in case we need additional information</h6>
                     <form @submit.prevent="saveResponse">
                         <div class="grid grid-cols-2 gap-2">
                             <div class="grid text-start my-3">
