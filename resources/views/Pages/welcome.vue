@@ -102,7 +102,7 @@ const resetForm = () => {
                 </div>
                 <div v-else-if="currentQuiz===4">
                    <div class="py-3 text-center">
-                       <img class="mx-auto group-hover:scale-125 hover:scale-125 transition-all duration-300 cursor-pointer h-10 w-10" src="https://img.icons8.com/color/48/000000/lol.png" alt="Lots of love face"/>
+                       <img class="mx-auto  h-10 w-10" src="https://img.icons8.com/color/48/000000/lol.png" alt="Lots of love face"/>
                        <h2 class="text-2xl my-2" @click="resetForm">Thank you for your feedback!</h2>
                    </div>
                 </div>
