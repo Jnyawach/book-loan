@@ -54,7 +54,7 @@ watch([start, end],()=>getEarnings())
         <template #header>
             <div class="flex justify-between items-center">
                 <div>
-                    <h6 class="text-md font-black text-sumo-300">Customer rating</h6>
+                    <h6 class="text-md font-black text-sumo-300">Customer reviews</h6>
                 </div>
                 <div class="flex justify-end gap-2 items-center">
                     <p>Sort by date:</p>
