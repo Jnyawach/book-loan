@@ -38,3 +38,6 @@ Create a sales representative user in the database
 ```
 php artisan create:user
 ```
+
+Set up your mailing credentials and SMS api keys
+on your env file

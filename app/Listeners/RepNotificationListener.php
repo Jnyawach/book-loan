@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\RepNotificationEvent;
 use App\Mail\SendReviewEmail;
+use App\Models\User;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Log;
@@ -26,8 +27,11 @@ class RepNotificationListener
     public function handle(RepNotificationEvent $event): void
     {
         //
-        $user=$event->user;
+        $user=User::findOrFail($event->user->id);
         $customer=$event->customer;
+
+         //Send email to sales rep
+        Mail::to($user)->send(new SendReviewEmail($user,$customer));
 
         //Send SMS
         $username = config('sms.sms_username');
@@ -50,7 +54,6 @@ class RepNotificationListener
 
 
 
-        //Send email
-        Mail::to($user)->send(new SendReviewEmail($user,$customer));
+
     }
 }
