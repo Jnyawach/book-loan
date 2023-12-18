@@ -39,6 +39,7 @@ class RepNotificationListener
 
         $AT       = new AfricasTalking($username, $apiKey);
         $sms      = $AT->sms();
+
 ;
         $message='Hello ' .$user->name. ' A new detractor review has been submitted by a customer.
         See additional information below. \n
@@ -49,8 +50,10 @@ class RepNotificationListener
         $result   = $sms->send([
             'to'      => $user->cellphone,
             'message' => $message,
-            'from'=>'Company X'
+
         ]);
+
+        Log::info($result);
 
 
 

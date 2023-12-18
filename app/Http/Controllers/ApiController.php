@@ -40,13 +40,15 @@ class ApiController extends Controller
             ->whereBetween('created_at',[$start,$end])
         ->select('created_at','customer_id','id',DB::raw('DATE(created_at) as date'))->get()->groupBy('date');
 
+
         $customers=[];
 
         foreach ($answers as $key=>$answer){
             $reply=$answer->groupBy('customer_id')->count();
             $entry=[
                 'day'=>Carbon::parse($key)->format('D j'),
-                'data'=>$reply
+                'data'=>$reply,
+
             ];
             $customers[]=$entry;
 
