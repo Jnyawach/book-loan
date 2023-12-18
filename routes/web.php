@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\MainController::class,'index']);
-Route::post('/answers/save',[\App\Http\Controllers\AnswersController::class,'save']);
+
+
 
 //Auth routes
 
@@ -27,11 +28,7 @@ Route::group([], function (){
 });
 
 Route::group(['middleware'=>'auth'], function (){
-    Route::get('test-mail',[DashboardController::class, 'testMail']);
+    Route::get('/', [MainController::class,'index']);
     Route::post('auth/logout',[AuthController::class,'logout']);
-    Route::get('dashboard/questions/show/{id}', [DashboardController::class, 'show']);
-    Route::get('dashboard/questions', [DashboardController::class, 'question']);
-    Route::get('dashboard/customers', [DashboardController::class, 'customer']);
-    Route::get('dashboard', [DashboardController::class, 'dashboard']);
 
 });
