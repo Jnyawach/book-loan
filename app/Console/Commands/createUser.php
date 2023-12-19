@@ -2,8 +2,10 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\RoleEnum;
 use App\Models\User;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class createUser extends Command
@@ -28,22 +30,25 @@ class createUser extends Command
     public function handle()
     {
         //
-        $name=$this->ask('What is your name?');
-        $email=$this->ask('What is your email?');
-        $phone=$this->ask('What is your phone number?');
-        $password=$this->secret('Provide a password');
+        DB::transaction(function (){
+            $name=$this->ask('What is your name?');
+            $email=$this->ask('What is your email?');
+            $password=$this->secret('Provide a password');
 
-        $user=User::where('email', $email)->first();
-        if ($user){
-            die('User already exists under the same email');
-        }
+            $user=User::where('email', $email)->first();
+            if ($user){
+                die('User already exists under the same email');
+            }
 
-        User::create([
-            'name'=>$name,
-            'email'=>$email,
-            'cellphone'=>$phone,
-            'password'=>Hash::make($password)
-        ]);
+            $user=User::create([
+                'name'=>$name,
+                'email'=>$email,
+                'password'=>Hash::make($password)
+            ]);
+
+            $user->assignRole(RoleEnum::ADMIN->value);
+        });
+
         $this->info('User has been successfully created');
     }
 }

@@ -11,8 +11,8 @@ class MainController extends Controller
     //
 
     public function index(){
-        $quizzes=Question::select('quiz','id')->get();
 
-        return inertia::render('welcome', compact('quizzes'));
+
+        return inertia::render('welcome');
     }
 }

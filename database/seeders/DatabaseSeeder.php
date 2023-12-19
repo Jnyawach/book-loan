@@ -15,22 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
 
         $this->call([
-            QuestionSeeder::class
+           RoleSeeder::class,
         ]);
-        $customers=Customer::factory(100)->create();
-        foreach ($customers as $customer){
-            $question=Question::all();
-            foreach ($question as $quiz){
-                $customer->answers()->create([
-                    'value'=>fake()->numberBetween(1,5),
-                    'question_id'=>$quiz->id
-                ]);
-            }
 
-        }
 
     }
 }

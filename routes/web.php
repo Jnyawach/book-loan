@@ -22,13 +22,16 @@ use Illuminate\Support\Facades\Route;
 //Auth routes
 
 Route::group([], function (){
+    Route::post('auth/save',[AuthController::class,'saveUser']);
+    Route::get('auth/register',[AuthController::class,'register'])->name('register');
     Route::get('auth/login',[AuthController::class,'login'])->name('login');
     Route::post('auth/authenticate',[AuthController::class,'authenticate']);
+    Route::get('/', [MainController::class,'index']);
 
 });
 
 Route::group(['middleware'=>'auth'], function (){
-    Route::get('/', [MainController::class,'index']);
+
     Route::post('auth/logout',[AuthController::class,'logout']);
 
 });

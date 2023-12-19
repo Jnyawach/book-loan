@@ -13,7 +13,20 @@ return new class extends Migration
     {
         Schema::create('books', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('publisher');
+            $table->string('isbn');
+            $table->string('category');
+            $table->string('sub_category');
+            $table->string('image');
+            $table->mediumText('description');
+            $table->integer('pages');
+            $table->unsignedBigInteger('added_by')->index();
             $table->timestamps();
+            $table->softDeletes();
+
+            $table->foreign('added_by')->references('id')->on('users')->onDelete('cascade');
+
         });
     }
 

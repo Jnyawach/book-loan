@@ -19,6 +19,7 @@
         "@vueuse/components": "^10.5.0",
         "@vueuse/core": "^10.5.0",
         "apexcharts": "^3.44.0",
+        "element-plus": "^2.4.4",
         "moment": "^2.29.4",
         "vue": "^3.2.36",
         "vue-loader": "^17.3.1",
