@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminBooksController;
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
+
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,4 +36,9 @@ Route::group(['middleware'=>'auth'], function (){
 
     Route::post('auth/logout',[AuthController::class,'logout']);
 
+});
+
+Route::group(['middleware'=>['auth','role:admin']], function (){
+    Route::resource('/admin/books', AdminBooksController::class);
+    Route::resource('/admin', AdminDashboardController::class);
 });

@@ -54,7 +54,7 @@
 }
 
 .sumo-input{
-    @apply w-full bg-white font-medium text-sm  rounded-xl   border border-gray-300 text-gray-900 focus:ring-sky-600 focus:border-sky-600 block h-12 p-2
+    @apply w-full bg-white font-medium text-sm  rounded-xl   border border-gray-300 text-gray-900 focus:ring-0 focus:outline-0 focus:border-sky-600 block h-12 p-2
 }
 .sumo-textarea{
     @apply w-full bg-white font-medium text-sm  rounded-xl  border border-gray-300 text-gray-900 focus:ring-sky-600 focus:border-sky-600 block p-2

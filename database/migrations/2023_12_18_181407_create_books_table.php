@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('isbn');
             $table->string('category');
             $table->string('sub_category');
-            $table->string('image');
             $table->mediumText('description');
             $table->integer('pages');
             $table->unsignedBigInteger('added_by')->index();

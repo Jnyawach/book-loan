@@ -55,7 +55,7 @@ const logout=()=>{
     <aside id="default-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-white shadow-r-lg border-r" aria-label="Sidebar">
         <div class="h-full px-5 py-4 overflow-y-auto bg-white">
             <div class="my-3">
-                    <h1 class="font-bold text-lg ">COMPANY X</h1>
+                    <h1 class="font-bold text-lg ">BOOK LOAN</h1>
             </div>
             <div class="my-5 bg-sky-50 rounded-xl p-2 ">
                 <div class="flex gap-2 items-center border-b py-3 border-gray-300">
@@ -69,15 +69,15 @@ const logout=()=>{
                 </div>
                 <div class="py-3">
                     <h6 class="text-gray-600 font-medium text-sm">Role</h6>
-                    <h2 class="text-xl font-bold text-sky-700">Sales rep</h2>
+                    <h2 class="text-xl font-bold text-sky-700">{{$page.props.auth.role}}</h2>
                 </div>
             </div>
             <ul class="space-y-2 font-medium pt-3 min-h-[45vh] border-b border-gray-300 text-sm">
                 <li>
-                    <Link href="/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-sky-700  hover:bg-gray-100 group"
-                          :class="{ 'bg-gray-100 text-sky-700': $page.component === 'dashboard/index' }"
+                    <Link href="/admin" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-sky-700  hover:bg-gray-100 group"
+                          :class="{ 'bg-gray-100 text-sky-700': $page.component === 'admin/index' }"
                     >
-                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === 'dashboard/index' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === 'admin/index' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path d="M488 392H251.9C241.7 359.6 211.8 336 176 336s-65.69 23.62-75.93 56H24C10.75 392 0 402.7 0 416s10.75 24 24 24h76.07C110.3 472.4 140.2 496 176 496s65.69-23.62 75.93-56H488c13.25 0 24-10.75 24-24S501.3 392 488 392zM176 448c-17.64 0-32-14.36-32-32s14.36-32 32-32s32 14.36 32 32S193.6 448 176 448zM488 232h-76.07C401.7 199.6 371.8 176 336 176s-65.69 23.62-75.93 56H24C10.75 232 0 242.7 0 256s10.75 24 24 24h236.1C270.3 312.4 300.2 336 336 336s65.69-23.62 75.93-56H488C501.3 280 512 269.3 512 256S501.3 232 488 232zM336 288c-17.64 0-32-14.36-32-32s14.36-32 32-32s32 14.36 32 32S353.6 288 336 288zM24 120h108.1C142.3 152.4 172.2 176 208 176s65.69-23.62 75.93-56H488C501.3 120 512 109.3 512 96s-10.75-24-24-24h-204.1C273.7 39.62 243.8 16 208 16S142.3 39.62 132.1 72H24C10.75 72 0 82.75 0 96S10.75 120 24 120zM208 64c17.64 0 32 14.36 32 32s-14.36 32-32 32s-32-14.36-32-32S190.4 64 208 64z"/>
                         </svg>
                         <span class="ml-3">Dashboard</span>
@@ -85,13 +85,13 @@ const logout=()=>{
                 </li>
 
                 <li>
-                    <Link href="/dashboard/customers" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-sky-700  hover:bg-gray-100 group"
-                          :class="{ 'bg-gray-100 text-sky-700': $page.component === 'dashboard/customers' }"
+                    <Link href="/admin/books" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-sky-700  hover:bg-gray-100 group"
+                          :class="{ 'bg-gray-100 text-sky-700': $page.component === 'admin/books/index' }"
                     >
-                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === '/dashboard/questions' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                            <path d="M2 22C2 17.5817 5.58172 14 10 14C14.4183 14 18 17.5817 18 22H16C16 18.6863 13.3137 16 10 16C6.68629 16 4 18.6863 4 22H2ZM10 13C6.685 13 4 10.315 4 7C4 3.685 6.685 1 10 1C13.315 1 16 3.685 16 7C16 10.315 13.315 13 10 13ZM10 11C12.21 11 14 9.21 14 7C14 4.79 12.21 3 10 3C7.79 3 6 4.79 6 7C6 9.21 7.79 11 10 11ZM18.2837 14.7028C21.0644 15.9561 23 18.752 23 22H21C21 19.564 19.5483 17.4671 17.4628 16.5271L18.2837 14.7028ZM17.5962 3.41321C19.5944 4.23703 21 6.20361 21 8.5C21 11.3702 18.8042 13.7252 16 13.9776V11.9646C17.6967 11.7222 19 10.264 19 8.5C19 7.11935 18.2016 5.92603 17.041 5.35635L17.5962 3.41321Z"></path>
+                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === '/admin/books/index' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                           <path d="M510.354 435.363L402.686 35.422C396.939 14.078 377.547 0 356.354 0C352.242 0 348.059 0.531 343.896 1.641L282.078 18.125C276.193 19.695 270.939 22.383 266.295 25.758C258.254 10.508 242.436 0 224 0H160C151.213 0 143.084 2.531 136 6.656C128.916 2.531 120.787 0 112 0H48C21.49 0 0 21.492 0 48V464C0 490.508 21.49 512 48 512H112C120.787 512 128.916 509.469 136 505.344C143.084 509.469 151.213 512 160 512H224C250.51 512 272 490.508 272 464V165.281L355.805 476.578C361.553 497.926 380.945 512 402.139 512C406.25 512 410.432 511.469 414.594 510.359L476.412 493.875C502.018 487.043 517.215 460.848 510.354 435.363ZM224 48V96H160V48H224ZM160 144H224V368H160V144ZM112 368H48V144H112V368ZM112 48V96H48V48H112ZM48 464V416H112V464H48ZM160 464V416H224V464H160ZM294.445 64.504L356.271 48.02L356.361 48L368.742 93.93L306.828 110.445L294.445 64.504ZM319.266 156.586L381.18 140.074L439.223 355.41L377.309 371.922L319.266 156.586ZM402.154 464.102L389.746 418.066L451.66 401.555L464.045 447.496L402.154 464.102Z"/>
                         </svg>
-                        <span class="ml-3">Customers Ratings</span>
+                        <span class="ml-3">Books</span>
                     </Link>
                 </li>
 

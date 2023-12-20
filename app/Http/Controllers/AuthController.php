@@ -25,7 +25,11 @@ class AuthController extends Controller
 
         if(Auth::attempt(['email'=>$request->email,'password'=>$request->password])){
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            $user=Auth::user();
+            if ($user->hasRole(RoleEnum::ADMIN->value)){
+                return redirect()->intended('/admin');
+            }
+            return redirect()->intended('/');
 
         }
 
