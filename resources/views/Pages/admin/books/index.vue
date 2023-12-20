@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import {Head, Link} from "@inertiajs/vue3";
 import MainLayout from "@/views/layouts/main-layout.vue";
+import DataPagination from "@/views/components/data-pagination.vue";
+defineProps({
+    books:{
+        type:Object as ()=>any,
+        required:true
+    },
+    filters:{
+        type:Object as ()=>any,
+        required:true
+    }
+})
 </script>
 
 <template>
@@ -42,6 +53,109 @@ import MainLayout from "@/views/layouts/main-layout.vue";
                             </button>
                         </Link>
                     </div>
+                </div>
+            </div>
+
+            <div class="border rounded shadow my-3 overflow-hidden">
+                <div>
+
+                    <div class="relative">
+                        <table class="w-full text-sm text-left text-gray-700 font-medium">
+                            <thead class="text-xs text-sky-600 uppercase bg-sky-50">
+                            <tr class="border-b">
+                                <th scope="col" class="px-2 py-3">
+                                   Cover
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    Title
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    ISBN
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    Publisher
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    Added By
+                                </th>
+
+                                <th scope="col" class="px-2 py-3">
+                                    Category
+                                </th>
+                                <th scope="col" class="px-2 py-3">
+                                    Subcategory
+                                </th>
+                                <th scope="col" class="px-2 py-3 text-end">
+                                    Action
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody class="[&>*:nth-child(even)]:bg-gray-100">
+                            <tr class="border-b text-xs" v-for="book in books.data" :key="book.id">
+                                <th scope="row" class="p-2">
+                                    <img class="h-14" :src="book.small_image" :alt="book.name">
+
+                                </th>
+                                <td class="px-2 py-3 font-semibold text-sumo-800 whitespace-nowrap">
+                                    {{book.name}}
+                                </td>
+                                <td class="px-2 py-3 capitalize">
+                                    {{book.isbn}}
+                                </td>
+
+                                <td class="px-2 py-3 capitalize">
+                                    {{book.publisher}}
+                                </td>
+                                <td class="px-2 py-3 capitalize">
+                                    {{book.added_by}}
+                                </td>
+                                <td class="px-2 py-3 capitalize">
+                                    {{book.category}}
+                                </td>
+                                <td class="px-2 py-3 capitalize">
+                                    {{book.sub_category}}
+                                </td>
+                                <td class="px-2 py-3">
+                                    <el-dropdown :key="book.id" placement="bottom-end">
+                                        <button class="flex items-center gap-2 text-xs border-0 outline-0">
+                                            <span>Action</span>
+                                            <svg class="h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                <path d="M12 3C10.9 3 10 3.9 10 5C10 6.1 10.9 7 12 7C13.1 7 14 6.1 14 5C14 3.9 13.1 3 12 3ZM12 17C10.9 17 10 17.9 10 19C10 20.1 10.9 21 12 21C13.1 21 14 20.1 14 19C14 17.9 13.1 17 12 17ZM12 10C10.9 10 10 10.9 10 12C10 13.1 10.9 14 12 14C13.1 14 14 13.1 14 12C14 10.9 13.1 10 12 10Z"></path>
+                                            </svg>
+                                        </button>
+
+                                        <template #dropdown>
+                                            <ul class="divide-y w-36">
+                                                <li>
+                                                    <Link :href="`/admin/books/${book.id}`" class="p-2  text-xs hover:text-blue-800 flex gap-2 font-medium dark:hover:text-blue-400">
+                                                        <span>View details</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link :href="`/admin/books/${book.id}/edit`" class="p-2  text-xs hover:text-blue-800 flex gap-2 font-medium dark:hover:text-blue-400">
+                                                        <span>Update details</span>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <button  class="p-2  text-xs hover:text-blue-800 flex gap-2 font-medium dark:hover:text-blue-400">
+                                                        <span>Delete book</span>
+                                                    </button>
+                                                </li>
+
+
+                                            </ul>
+                                        </template>
+                                    </el-dropdown>
+                                </td>
+
+
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--pagination-->
+                        <data-pagination :data="books"></data-pagination>
+                    </div>
+
                 </div>
             </div>
         </section>

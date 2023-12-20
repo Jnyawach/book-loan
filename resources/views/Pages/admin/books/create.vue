@@ -93,7 +93,7 @@ let form=useForm({
                     <div>
                         <label class="sumo-label">Book Image <span class="text-red-500 ">*</span></label>
                         <div class="my-2">
-                            <input type="file" class=" w-full ">
+                            <input type="file" accept="image/*" class=" w-full "  @input="form.image=$event.target.files[0]" required>
                         </div>
                     </div>
                 </div>

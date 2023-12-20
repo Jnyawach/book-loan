@@ -21,6 +21,8 @@ class Book extends Model implements HasMedia
         'sub_category',
         'description',
         'pages',
+        'added_by',
+
 
     ];
 
@@ -30,6 +32,10 @@ class Book extends Model implements HasMedia
 
     public function addedBy(){
         return $this->belongsTo(User::class, 'added_by', 'id');
+    }
+
+    public function activeLoan(){
+        return $this->hasOne(BookLoan::class)->where('return_date',null);
     }
 
     public function registerMediaCollections(): void

@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Enums\BookCategoryEnum;
 use App\Enums\SubCategoryEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookResource;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
@@ -18,7 +20,15 @@ class AdminBooksController extends Controller
     public function index()
     {
         //
-        return inertia::render('admin/books/index');
+        $books=Book::query()
+            ->when(request('search'),function ($query){
+                $query->where('name','like','%'.request('search').'%')
+                    ->orWhere('publisher','like','%'.request('search').'%');
+            })
+            ->paginate(request('showing')??10);
+        $books=BookResource::collection($books);
+        $filters=request()->only(['search','showing']);
+        return inertia::render('admin/books/index', compact('books','filters'));
     }
 
     /**
@@ -38,13 +48,15 @@ class AdminBooksController extends Controller
     public function store(Request $request)
     {
         //
+
         $validated=$request->validate([
             'name'=>'required|max:255|string',
             'publisher'=>'required|max:255|string',
             'category'=>'required|max:50|string',
-            'sub_category'=>'required|max:50|string',
+            'subcategory'=>'required|max:50|string',
             'description'=>'required|string',
             'pages'=>'required|integer',
+            'isbn'=>'required|max:255|string',
             'image'=>'required|image|max:2048|mimes:png,jpg,jpeg',
         ]);
 
@@ -53,16 +65,18 @@ class AdminBooksController extends Controller
                 'name'=>$validated['name'],
                 'publisher'=>$validated['publisher'],
                 'category'=>$validated['category'],
-                'sub_category'=>$validated['sub_category'],
+                'sub_category'=>$validated['subcategory'],
                 'description'=>$validated['description'],
                 'pages'=>$validated['pages'],
+                'isbn'=>$validated['isbn'],
+                'added_by'=>Auth::id()
             ]);
             if($files=$request->image){
                 $book->addMedia($files)->toMediaCollection('bookImage');
             }
         });
 
-        return redirect()->back()->with([
+        return redirect()->route('books.index')->with([
             'toast' => [
                 'message' => 'Book created successfully',
                 'type' => 'success'
@@ -84,6 +98,10 @@ class AdminBooksController extends Controller
     public function edit(string $id)
     {
         //
+        $book=new BookResource(Book::findOrFail($id));
+        $categories=BookCategoryEnum::cases();
+        $sub_categories=SubCategoryEnum::cases();
+        return inertia::render('admin/books/edit',compact('book','categories','sub_categories'));
     }
 
     /**
@@ -92,6 +110,40 @@ class AdminBooksController extends Controller
     public function update(Request $request, string $id)
     {
         //
+       
+        $validated=$request->validate([
+            'name'=>'required|max:255|string',
+            'publisher'=>'required|max:255|string',
+            'category'=>'required|max:50|string',
+            'subcategory'=>'required|max:50|string',
+            'description'=>'required|string',
+            'pages'=>'required|integer',
+            'isbn'=>'required|max:255|string',
+            'image'=>'nullable|image|max:2048|mimes:png,jpg,jpeg',
+        ]);
+        $book=Book::findOrFail($id);
+        DB::transaction(function () use ($validated, $request, $book){
+            $book->update([
+                'name'=>$validated['name'],
+                'publisher'=>$validated['publisher'],
+                'category'=>$validated['category'],
+                'sub_category'=>$validated['subcategory'],
+                'description'=>$validated['description'],
+                'pages'=>$validated['pages'],
+                'isbn'=>$validated['isbn'],
+            ]);
+            if ($files=$request->image){
+                $book->getFirstMedia('bookImage')?->clearMediaCollection('bookImage');
+                $book->addMedia($files)->toMediaCollection('bookImage');
+            }
+        });
+
+        return redirect()->route('books.index')->with([
+            'toast' => [
+                'message' => 'Book updated successfully',
+                'type' => 'success'
+            ]
+        ]);
     }
 
     /**

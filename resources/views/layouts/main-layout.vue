@@ -1,6 +1,7 @@
 <script setup lang="ts">
 
 import {Link,useForm} from "@inertiajs/vue3";
+import Toast from "@/views/components/toast.vue"
 
 let form=useForm({
 })
@@ -13,6 +14,9 @@ const logout=()=>{
 </script>
 
 <template>
+    <Teleport to="body">
+        <Toast :toast="$page.props.toast"></Toast>
+    </Teleport>
     <div class="sm:hidden flex justify-between gap-2 z-[100000] p-2 w-full bg-white shadow">
         <div>
             <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button">
