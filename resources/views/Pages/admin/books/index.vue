@@ -1,8 +1,11 @@
 <script setup lang="ts">
-import {Head, Link} from "@inertiajs/vue3";
+import {Head, Link, router} from "@inertiajs/vue3";
 import MainLayout from "@/views/layouts/main-layout.vue";
 import DataPagination from "@/views/components/data-pagination.vue";
-defineProps({
+import PromptAlert from "@/views/components/prompt-alert.vue";
+import {watch,ref} from "vue";
+import debounce from "lodash/debounce";
+let props=defineProps({
     books:{
         type:Object as ()=>any,
         required:true
@@ -12,6 +15,18 @@ defineProps({
         required:true
     }
 })
+const deleteBook=(book:number)=>{
+    router.delete(`/admin/books/${book}` )
+}
+
+const showing=ref(props.filters.showing || 10)
+const search=ref(props.filters.search || '')
+watch([showing, search], debounce(function () {
+router.get('/admin/books', {
+    showing: showing.value,
+    search: search.value
+},{ preserveScroll: true, replace: true,preserveState: true})
+}, 300));
 </script>
 
 <template>
@@ -32,7 +47,7 @@ defineProps({
             <div class="flex justify-between gap-2">
                 <div class="flex gap-2 items-center">
                     <label>Showing</label>
-                    <select class="sumo-input">
+                    <select v-model="showing" class="sumo-input">
                         <option value="10">10</option>
                         <option value="20">20</option>
                         <option value="50">50</option>
@@ -41,7 +56,7 @@ defineProps({
                 </div>
                 <div class="flex gap-2">
                     <div class="w-96">
-                        <input type="search" class="sumo-input" placeholder="Search books by name...">
+                        <input v-model="search" type="search" class="sumo-input" placeholder="Search books by name...">
                     </div>
                     <div>
                         <Link title="Add new books" href="/admin/books/create">
@@ -137,9 +152,17 @@ defineProps({
                                                     </Link>
                                                 </li>
                                                 <li>
-                                                    <button  class="p-2  text-xs hover:text-blue-800 flex gap-2 font-medium dark:hover:text-blue-400">
-                                                        <span>Delete book</span>
-                                                    </button>
+                                                    <prompt-alert @proceed="deleteBook(book.id)"
+                                                                title="Are you sure you want to delete this book?"
+                                                                  description="This action is irreversible. The book will be deleted from the system."
+                                                    >
+                                                        <template #trigger>
+                                                            <button   class="p-2  text-xs hover:text-blue-800 flex gap-2 font-medium dark:hover:text-blue-400">
+                                                                <span>Delete book</span>
+                                                            </button>
+                                                        </template>
+                                                    </prompt-alert>
+
                                                 </li>
 
 

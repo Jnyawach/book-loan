@@ -110,7 +110,7 @@ class AdminBooksController extends Controller
     public function update(Request $request, string $id)
     {
         //
-       
+
         $validated=$request->validate([
             'name'=>'required|max:255|string',
             'publisher'=>'required|max:255|string',
@@ -152,5 +152,13 @@ class AdminBooksController extends Controller
     public function destroy(string $id)
     {
         //
+        $book=Book::findOrFail($id);
+        $book->delete();
+        return redirect()->route('books.index')->with([
+            'toast' => [
+                'message' => 'Book deleted successfully',
+                'type' => 'success'
+            ]
+        ]);
     }
 }

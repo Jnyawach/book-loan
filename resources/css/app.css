@@ -38,7 +38,7 @@
 }
 
 .btn-simple{
-    @apply border px-10 py-3 text-gray-600 border-gray-300 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100
+    @apply border px-5 py-3 text-gray-600 border-gray-300 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100
 }
 
 .btn-link{
