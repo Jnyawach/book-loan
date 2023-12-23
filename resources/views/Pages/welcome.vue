@@ -58,20 +58,25 @@ watch([showing, search], debounce(function () {
                         </div>
                     </div>
                     <!--books-->
-                    <div class="my-5 grid grid-cols-4 gap-8">
+                    <div class="my-5 grid grid-cols-4 gap-5">
                         <div v-for="book in books.data">
-                            <div>
+                            <div class="bg-white shadow rounded-md">
                               <div class="relative">
-                                  <div class="aspect-w-8 aspect-h-12 rounded-md overflow-hidden">
+                                  <div class="aspect-w-8 aspect-h-12 rounded-t-md overflow-hidden">
                                       <img :src="book.small_image" class="w-full h-full object-center object-cover" alt="book.name">
                                   </div>
                                   <div class="absolute top-0 right-0 ">
                                       <button class="bg-white/80 p-1 text-sky-800 font-medium">Preview details</button>
                                   </div>
                               </div>
+                                <div class="p-3">
+                                    <h6 class="my-2 font-bold text-md">{{useTruncate(book.name,30)}}</h6>
+                                    <p class="text-sky-600"> by {{book.publisher}}</p>
 
-                                <h6 class="my-2 font-bold text-md">{{useTruncate(book.name,30)}}</h6>
-                                <p class="text-sky-600"> by {{book.publisher}}</p>
+                                    <div class="flex justify-end">
+                                        <button class="btn-primary btn-small">Borrow</button>
+                                    </div>
+                                </div>
 
                             </div>
                         </div>
