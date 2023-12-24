@@ -23,7 +23,7 @@ class BookResource extends JsonResource
             'description' => $this->description,
             'pages' => $this->pages,
             'isbn' => $this->isbn,
-            'added_by' => $this->addedBy->name,
+            'added_by' => $this->addedBy?$this->addedBy->name:'',
             'big_image' => $this->getFirstMediaUrl('bookImage'),
             'small_image' => $this->getFirstMediaUrl('bookImage','book-icon'),
             'thumb_image' => $this->getFirstMediaUrl('bookImage','book-thumb'),

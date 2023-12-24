@@ -39,7 +39,7 @@
                                 <p class="my-2 text-xs">Category: <span class="text-sky-600">{{book.category}}>{{book.sub_category}}</span></p>
                                 <p>{{book.description}}</p>
                                 <div class="my-3">
-                                    <Link href="#" title="Borrow this book" class="btn-primary btn-small">Borrow this book</Link>
+                                    <Link :href="`books/${book.id}/borrow`" title="Borrow this book" class="btn-primary btn-small">Borrow this book</Link>
                                 </div>
                             </div>
                         </div>

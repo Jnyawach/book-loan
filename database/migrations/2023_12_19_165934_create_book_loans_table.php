@@ -25,7 +25,7 @@ return new class extends Migration
             $table->integer('penalty_amount')->nullable();
             $table->string('penalty_status')->nullable();
             $table->string('status');
-            $table->unsignedBigInteger('added_by')->index();
+            $table->unsignedBigInteger('added_by')->nullable();
             $table->foreign('added_by')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('book_id')->references('id')->on('books')->onDelete('cascade');

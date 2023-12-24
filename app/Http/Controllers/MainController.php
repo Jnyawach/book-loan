@@ -23,9 +23,15 @@ class MainController extends Controller
                     ->orWhere('description','like','%'.request('search').'%');
 
             })
+            ->when(request('category'),function ($query){
+                $query->where('category',request('category'));
+            })
+            ->when(request('sub_category'),function ($query){
+                $query->where('sub_category',request('sub_category'));
+            })
        ->paginate(request('showing')??10);
         $books=BookResource::collection($books);
-        $filters=request()->only(['search','showing']);
+        $filters=request()->only(['search','showing','category','sub_category']);
         $categories=BookCategoryEnum::cases();
         $sub_categories=SubCategoryEnum::cases();
 

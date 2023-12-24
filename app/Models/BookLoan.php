@@ -21,6 +21,7 @@ class BookLoan extends Model
         'penalty_status',
         'status',
         'added_by',
+        'due_date'
     ];
 
     public function book(){

@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\BooksController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -36,6 +37,11 @@ Route::group([], function (){
 Route::group(['middleware'=>'auth'], function (){
 
     Route::post('auth/logout',[AuthController::class,'logout']);
+
+    Route::get('/borrowing/{id}',[BooksController::class,'borrowingShow'])->name('borrowing.show');
+    Route::get('/borrowing',[BooksController::class,'borrowing']);
+    Route::get('/books/{id}/borrow',[BooksController::class,'index']);
+    Route::post('/books/borrow',[BooksController::class,'borrow']);
 
 });
 

@@ -40,7 +40,7 @@ let form=useForm({
                                 <Link href="#" class="hover:text-sky-700">Forgot password</Link>
                             </div>
                             <div class="order-1 md:order-2">
-                                <button type="submit" class="btn-primary w-44 flex items-center gap-2 justify-center">
+                                <button :disabled="form.processing" type="submit" class="btn-primary w-44 flex items-center gap-2 justify-center">
                                     <span>Login</span>
 
                                     <svg v-if="form.processing" class="fill-white w-5 animate-spin" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
