@@ -49,7 +49,9 @@ class BooksController extends Controller
 
 
     public function borrowing(){
-        return inertia::render('borrowing/index');
+        $loans=BookLoan::with('book')->latest()->paginate(10);
+        $loans=BookLoanResource::collection($loans);
+        return inertia::render('borrowing/index', compact('loans'));
     }
 
     public function borrowingShow(string $id){

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\BorrowingStatusEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -34,9 +35,7 @@ class Book extends Model implements HasMedia
         return $this->belongsTo(User::class, 'added_by', 'id');
     }
 
-    public function activeLoan(){
-        return $this->hasOne(BookLoan::class)->where('return_date',null);
-    }
+
 
     public function registerMediaCollections(): void
     {
@@ -49,5 +48,9 @@ class Book extends Model implements HasMedia
                 $this->addMediaConversion('book-thumb')
                     ->width(1200);
             });
+    }
+
+    public function activeLoan(){
+        return $this->hasOne(BookLoan::class,)->whereNot('status',BorrowingStatusEnum::AVAILABLE->value)->latest();
     }
 }

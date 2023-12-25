@@ -13,7 +13,10 @@ const logout=()=>{
                 <h1 class="text-lg font-bold text-sky-600">BOOK LOAN</h1>
             </div>
 
-            <div v-if="$page.props.auth">
+            <div v-if="$page.props.auth" class="flex items-center gap-5">
+                <div>
+                    <Link href="/borrowing" class="text-sky-600 hover:underline">Loaned books</Link>
+                </div>
                 <el-dropdown  placement="bottom-end">
                     <button class="outline-0 h-8 w-8 border border-sky-600  rounded-full bg-sky-50  flex place-content-center">
                         <svg class="fill-sky-600 self-center h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

@@ -6,6 +6,7 @@ import debounce from "lodash/debounce";
 import {useTruncate} from "@/scripts/useTruncate";
 import PreviewBook from "@/views/components/PreviewBook.vue";
 import DataPagination from "@/views/components/data-pagination.vue";
+import moment from "moment";
 let props=defineProps({
     filters: {
         type: Object as () => {
@@ -57,7 +58,7 @@ const clearFilters=()=>{
 
 <template>
     <Head>
-        <title>Company X</title>
+        <title>Loan a book today</title>
     </Head>
     <user-layout>
         <section class="p-5">
@@ -68,10 +69,10 @@ const clearFilters=()=>{
                         <el-collapse v-model="activeNames">
                             <el-collapse-item :name="index" v-for="(category, index) in categories">
                                 <template #title>
-                                   <h6 class="p-2 font-medium"> {{category}}</h6>
+                                   <h6 class="p-2 font-bold"> {{category}}</h6>
 
                                 </template>
-                                <ul class="space-y-2">
+                                <ul class="space-y-2 pl-5">
                                   <li v-for="(sub_category, newIndex) in sub_categories" :key="newIndex">
                                       <label class="flex items-center gap-2">
                                           <input v-model="book_category" type="radio" :value="[category, sub_category]">
@@ -113,8 +114,8 @@ const clearFilters=()=>{
                         </div>
                     </div>
                     <!--books-->
-                    <div class="my-5 grid grid-cols-4 gap-5">
-                        <div v-for="book in books.data" :key="book.id">
+                    <div class="my-5 grid grid-cols-2  lg:grid-cols-4 gap-5">
+                        <div v-for="book in books.data" :key="book.id" class="grid">
                             <div class="bg-white shadow rounded-md">
                               <div class="relative">
                                   <div class="aspect-w-8 aspect-h-12 rounded-t-md overflow-hidden">
@@ -132,8 +133,11 @@ const clearFilters=()=>{
                                 <div class="p-3">
                                     <h6 class="my-2 font-bold text-md">{{useTruncate(book.name,30)}}</h6>
                                     <p class="text-sky-600"> by {{book.publisher}}</p>
+                                    <div v-if="book.active_loan" class="">
+                                        <p>Available on <span class="text-sky-600">{{moment(book.active_loan.due_date).format('DD MMM YYYY')}}</span></p>
+                                    </div>
 
-                                    <div class="flex justify-end">
+                                    <div class="flex justify-end" v-else>
                                         <Link :href="`books/${book.id}/borrow`" class="btn-primary btn-small">Borrow</Link>
                                     </div>
                                 </div>

@@ -16,7 +16,7 @@ class MainController extends Controller
 
     public function index(){
 
-        $books=Book::query()
+        $books=Book::with(['activeLoan'])
             ->when(request('search'),function ($query){
                 $query->where('name','like','%'.request('search').'%')
                     ->orWhere('publisher','like','%'.request('search').'%')
