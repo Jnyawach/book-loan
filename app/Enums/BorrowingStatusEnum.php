@@ -5,10 +5,11 @@ namespace App\Enums;
 enum BorrowingStatusEnum: string
 {
 
-    case AVAILABLE = 'Available';
+
     case PENDING = 'Pending';
     case BORROWED = 'Borrowed';
-    case Extended = 'Extended';
+    case EXTENDED = 'Extended';
     case DELAYED = 'Delayed';
+    case RETURNED = 'Returned';
 
 }

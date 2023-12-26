@@ -38,7 +38,7 @@ class BooksController extends Controller
 
         ]);
 
-        return redirect()->route('borrowing.show',$loan->id)
+        return redirect()->route('borrowing.index')
             ->with([
                 'toast'=>[
                     'type'=>'success',
@@ -49,13 +49,33 @@ class BooksController extends Controller
 
 
     public function borrowing(){
-        $loans=BookLoan::with('book')->latest()->paginate(10);
+        $loans=BookLoan::where('user_id', Auth::id())->with('book')->latest()->paginate(10);
         $loans=BookLoanResource::collection($loans);
         return inertia::render('borrowing/index', compact('loans'));
     }
 
     public function borrowingShow(string $id){
-        $loan=new  BookLoanResource(BookLoan::with('book')->findOrFail($id));
+        $loan=new  BookLoanResource(BookLoan::with('book')->where('user_id',Auth::id())->findOrFail($id));
         return inertia::render('borrowing/show',compact('loan'));
+    }
+
+    public function extension(Request $request){
+        $validated=$request->validate([
+            'loan_id'=>'required|exists:book_loans,id',
+            'period'=>'required|integer',
+        ]);
+        $book_loan=BookLoan::findOrFail($validated['loan_id']);
+        $book_loan->update([
+            'due_date'=>Carbon::now()->addDays($validated['period']),
+            'status'=>BorrowingStatusEnum::EXTENDED->value,
+            'extended'=>true,
+            'extended_date'=>Carbon::now()
+        ]);
+        return redirect()->back()->with([
+            'toast'=>[
+                'type'=>'success',
+                'message'=>'Book Extended Successfully'
+            ]
+        ]);
     }
 }

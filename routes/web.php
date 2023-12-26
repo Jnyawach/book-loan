@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\AdminBooksController;
 use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminLoanController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\AuthController;
 
@@ -39,13 +40,17 @@ Route::group(['middleware'=>'auth'], function (){
     Route::post('auth/logout',[AuthController::class,'logout']);
 
     Route::get('/borrowing/{id}',[BooksController::class,'borrowingShow'])->name('borrowing.show');
-    Route::get('/borrowing',[BooksController::class,'borrowing']);
+    Route::get('/borrowing',[BooksController::class,'borrowing'])->name('borrowing.index');
     Route::get('/books/{id}/borrow',[BooksController::class,'index']);
     Route::post('/books/borrow',[BooksController::class,'borrow']);
+    Route::post('request/extension',[BooksController::class,'extension']);
 
 });
 
 Route::group(['middleware'=>['auth','role:admin']], function (){
+    Route::patch('/admin/loans/{id}/receive',[AdminLoanController::class,'receive']);
+    Route::patch('/admin/loans/{id}/approve',[AdminLoanController::class,'approve']);
+    Route::resource('/admin/loans', AdminLoanController::class);
     Route::resource('/admin/users', AdminUserController::class);
     Route::resource('/admin/books', AdminBooksController::class);
     Route::resource('/admin', AdminDashboardController::class);

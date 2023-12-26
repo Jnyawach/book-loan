@@ -51,6 +51,6 @@ class Book extends Model implements HasMedia
     }
 
     public function activeLoan(){
-        return $this->hasOne(BookLoan::class,)->whereNot('status',BorrowingStatusEnum::AVAILABLE->value)->latest();
+        return $this->hasOne(BookLoan::class,)->whereNot('status',BorrowingStatusEnum::RETURNED->value)->latest();
     }
 }

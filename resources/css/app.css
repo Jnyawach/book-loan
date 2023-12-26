@@ -46,7 +46,7 @@
 }
 
 .btn-small{
-    @apply  py-1  px-3 text-sm rounded-md
+    @apply  py-1  px-3 text-xs rounded-md
 }
 
 .btn-medium{

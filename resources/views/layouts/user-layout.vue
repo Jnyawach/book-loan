@@ -10,7 +10,9 @@ const logout=()=>{
     <div class=" px-5 py-3 border-b">
         <div class="flex justify-between items-center gap-3">
             <div>
-                <h1 class="text-lg font-bold text-sky-600">BOOK LOAN</h1>
+                <Link href="/">
+                    <h1 class="text-lg font-bold text-sky-600">BOOK LOAN</h1>
+                </Link>
             </div>
 
             <div v-if="$page.props.auth" class="flex items-center gap-5">
