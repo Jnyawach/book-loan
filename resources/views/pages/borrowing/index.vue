@@ -51,6 +51,10 @@ defineProps({
                             <div v-if="loan.status==='Extended'" class="text-red-500">
                                 <p>Under extension until: {{moment(loan.due_date).format('MMMM Do YYYY, h:mm a')}}</p>
                             </div>
+                            <div v-if="loan.status==='Delayed'" class="text-red-500">
+                                <p>Return deadline passed</p>
+                                <p>A penalty of KES {{moment().diff(loan.due_date,'days')*100}} has been applied</p>
+                            </div>
                         </div>
                     </div>
                     <hr>

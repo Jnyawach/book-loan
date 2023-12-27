@@ -1,7 +1,7 @@
 <script setup lang="ts">
 
 import MainLayout from "@/views/layouts/main-layout.vue";
-import {Head,Link} from "@inertiajs/vue3";
+import {Head, Link, router} from "@inertiajs/vue3";
 import DataPagination from "@/views/components/data-pagination.vue";
 import ApplyPenalty from "@/views/components/ApplyPenalty.vue";
 defineProps({
@@ -17,6 +17,10 @@ defineProps({
         required:true
     }
 })
+
+const approveLoan=(loan_id:number)=>{
+    router.patch(`/admin/loans/${loan_id}/approve`)
+}
 </script>
 
 <template>
