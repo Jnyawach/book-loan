@@ -4,9 +4,9 @@ import MainLayout from "@/views/layouts/main-layout.vue";
 import {Head, Link, router} from "@inertiajs/vue3";
 import {ref, watch} from "vue";
 import DataPagination from "@/views/components/data-pagination.vue";
-import CreateUser from "@/views/Pages/admin/users/CreateUser.vue";
+import CreateUser from "@/views/pages/admin/users/CreateUser.vue";
 import PromptAlert from "@/views/components/prompt-alert.vue";
-import EditUser from "@/views/Pages/admin/users/EditUser.vue";
+import EditUser from "@/views/pages/admin/users/EditUser.vue";
 import debounce from "lodash/debounce";
 let props=defineProps({
     users:{
