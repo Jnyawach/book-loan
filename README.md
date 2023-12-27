@@ -1,11 +1,11 @@
 # Customer Survey App
 
-This is a simple app to enable sales representatives collect
-feedback from customers
+This is a simple app to demonstrate a book loaning system. The app has
+been developed for a coding test.
 
 ### Installation
  ```
- git clone https://github.com/Jnyawach/survey-app.git
+ git clone https://github.com/Jnyawach/book-loan.git
  
  ```
 ```
@@ -33,11 +33,14 @@ php artisan serve
 ```
 npm run dev
 ```
-Create a sales representative user in the database
+Create an admin user in the database
 
 ```
 php artisan create:user
 ```
-
+Seeder sample books to get started with
+```
+php artisan db:seed --class=BookSeeder
+```
 Set up your mailing credentials and SMS api keys
 on your env file
