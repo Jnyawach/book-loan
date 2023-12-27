@@ -46,7 +46,7 @@ class BookSeeder extends Seeder
 
             $media =  $new_book->addMedia(
                 base_path("database/seeders/data/images/{$book->image}")
-            )->toMediaCollection('bookImage');
+            )->preservingOriginal()->toMediaCollection('bookImage');
         }
     }
 
