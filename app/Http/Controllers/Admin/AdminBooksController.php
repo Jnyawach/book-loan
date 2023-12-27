@@ -90,6 +90,8 @@ class AdminBooksController extends Controller
     public function show(string $id)
     {
         //
+        $book=new BookResource(Book::with('activeLoan')->findOrFail($id));
+        return inertia::render('admin/books/show',compact('book'));
     }
 
     /**

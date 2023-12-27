@@ -122,6 +122,18 @@ const logout=()=>{
                     </Link>
                 </li>
 
+                <li>
+                    <Link href="/admin/loans/penalties" class="flex items-center p-2 text-gray-900 rounded-lg hover:text-sky-700  hover:bg-gray-100 group"
+                          :class="{ 'bg-gray-100 text-sky-700': $page.component === 'admin/loans/penalty' }"
+                    >
+
+                        <svg class="h-5 fill-gray-900 group-hover:fill-sky-700" :class="{ 'fill-sky-700': $page.component === 'admin/loans/penalty' }" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                         <path d="M512 64H64C28.654 64 0 92.652 0 128V384C0 419.346 28.654 448 64 448H512C547.348 448 576 419.346 576 384V128C576 92.652 547.348 64 512 64ZM528 336C492.625 336 464 364.625 464 400H112C112 364.625 83.375 336 48 336V176C83.375 176 112 147.375 112 112H464C464 147.375 492.625 176 528 176V336ZM368 256C368 309.018 332.184 352 288 352S208 309.018 208 256C208 202.98 243.816 160 288 160S368 202.98 368 256Z"/>
+                        </svg>
+                        <span class="ml-3">Penalties</span>
+                    </Link>
+                </li>
+
 
 
 

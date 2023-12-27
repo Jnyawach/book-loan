@@ -2,11 +2,13 @@
 
 import MainLayout from "@/views/layouts/main-layout.vue";
 import {Head, Link, router} from "@inertiajs/vue3";
-import {ref} from "vue";
+import {ref, watch} from "vue";
 import CreateUser from "@/views/pages/admin/users/CreateUser.vue";
 import DataPagination from "@/views/components/data-pagination.vue";
 import EditUser from "@/views/pages/admin/users/EditUser.vue";
 import PromptAlert from "@/views/components/prompt-alert.vue";
+import ApplyPenalty from "@/views/components/ApplyPenalty.vue";
+import debounce from "lodash/debounce";
 let props=defineProps({
     loans:{
         type: Object as ()=>any,
@@ -35,6 +37,13 @@ const approveLoan=(loan_id:number)=>{
 const receiveBook=(loan_id:number)=>{
     router.patch(`/admin/loans/${loan_id}/receive`)
 }
+
+watch([search,showing],debounce(function (){
+    router.get('/admin/loans', {
+        search:search.value,
+        showing:showing.value
+    })
+},500))
 </script>
 
 <template>
@@ -121,6 +130,12 @@ const receiveBook=(loan_id:number)=>{
                             </p>
                             <p v-if="loan.status==='Delayed'" >
                                 <span class="text-red-500"> {{loan.status}}</span> Due date: {{new Date(loan.due_date).toDateString()}}
+                                <ApplyPenalty :loan="loan">
+                                   <template #trigger>
+                                       <button class="btn-danger btn-small">Apply penalty</button>
+                                   </template>
+                                </ApplyPenalty>
+
                             </p>
 
                         </td>
@@ -140,9 +155,10 @@ const receiveBook=(loan_id:number)=>{
                                         <li v-if="loan.status==='Pending'">
                                             <button class="p-2 hover:text-sky-600" @click="approveLoan(loan.id)">Approve loan</button>
                                         </li>
-                                        <li v-if="loan.status==='Borrowed'">
+                                        <li v-if="loan.status==='Borrowed'||loan.status==='Extended'">
                                             <button class="p-2 hover:text-sky-600" @click="receiveBook(loan.id)">Receive book</button>
                                         </li>
+
                                     </ul>
                                 </template>
                             </el-dropdown>

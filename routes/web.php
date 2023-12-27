@@ -48,6 +48,8 @@ Route::group(['middleware'=>'auth'], function (){
 });
 
 Route::group(['middleware'=>['auth','role:admin']], function (){
+    Route::get('admin/loans/penalties',[AdminLoanController::class,'penalty']);
+    Route::post('admin/loans/apply-penalty',[AdminLoanController::class,'applyPenalty']);
     Route::patch('/admin/loans/{id}/receive',[AdminLoanController::class,'receive']);
     Route::patch('/admin/loans/{id}/approve',[AdminLoanController::class,'approve']);
     Route::resource('/admin/loans', AdminLoanController::class);

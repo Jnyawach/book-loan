@@ -5,6 +5,7 @@ import DataPagination from "@/views/components/data-pagination.vue";
 import PromptAlert from "@/views/components/prompt-alert.vue";
 import {watch,ref} from "vue";
 import debounce from "lodash/debounce";
+import PreviewBook from "@/views/components/PreviewBook.vue";
 let props=defineProps({
     books:{
         type:Object as ()=>any,
@@ -39,9 +40,7 @@ router.get('/admin/books', {
                     <li>
                         <Link   :class="{ 'text-sky-700': $page.component === 'admin/books/index' }" href="/admin/books">All Books</Link>
                     </li>
-                    <li>
-                        <Link href="/admin/loan">On Loan</Link>
-                    </li>
+
                 </ul>
             </div>
             <div class="flex justify-between gap-2">
@@ -142,6 +141,7 @@ router.get('/admin/books', {
                                         <template #dropdown>
                                             <ul class="divide-y w-36">
                                                 <li>
+
                                                     <Link :href="`/admin/books/${book.id}`" class="p-2  text-xs hover:text-blue-800 flex gap-2 font-medium dark:hover:text-blue-400">
                                                         <span>View details</span>
                                                     </Link>

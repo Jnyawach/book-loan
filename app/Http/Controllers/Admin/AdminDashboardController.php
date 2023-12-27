@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\BorrowingStatusEnum;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\BookLoanResource;
+use App\Models\Book;
+use App\Models\BookLoan;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -14,7 +19,18 @@ class AdminDashboardController extends Controller
     public function index()
     {
         //
-        return inertia::render('admin/index');
+        $loans=BookLoan::whereNot('status',BorrowingStatusEnum::RETURNED->value)->count();
+        $borrowed=BookLoan::whereStatus(BorrowingStatusEnum::BORROWED->value)->count();
+        $delayed=BookLoan::whereStatus(BorrowingStatusEnum::DELAYED->value)->count();
+        $extended=BookLoan::whereStatus(BorrowingStatusEnum::EXTENDED->value)->count();
+        $pending=BookLoan::whereStatus(BorrowingStatusEnum::PENDING->value)->count();
+        $books=Book::count();
+        $users=User::count();
+        $pending_loans=BookLoanResource::collection(BookLoan::with(['user','book'])->where('status',BorrowingStatusEnum::PENDING->value)->limit(10)->get());
+        return inertia::render('admin/index', compact(
+            'loans','borrowed','pending_loans',
+            'delayed','extended','books','users','pending'
+        ));
     }
 
     /**

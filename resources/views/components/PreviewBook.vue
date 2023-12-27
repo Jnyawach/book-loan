@@ -38,8 +38,12 @@
                                 <p class="text-sky-600 text-xs">By {{book.publisher}} | ISBN: {{book.isbn}} | {{book.pages}} pages</p>
                                 <p class="my-2 text-xs">Category: <span class="text-sky-600">{{book.category}}>{{book.sub_category}}</span></p>
                                 <p>{{book.description}}</p>
-                                <div class="my-3">
-                                    <Link :href="`books/${book.id}/borrow`" title="Borrow this book" class="btn-primary btn-small">Borrow this book</Link>
+                                <div v-if="book.active_loan" class="">
+                                    <p>Available on <span class="text-sky-600">{{moment(book.active_loan.due_date).format('DD MMM YYYY')}}</span></p>
+                                </div>
+
+                                <div class="flex justify-end" v-else>
+                                    <Link :href="`books/${book.id}/borrow`" class="btn-primary btn-small">Borrow</Link>
                                 </div>
                             </div>
                         </div>
@@ -55,6 +59,7 @@
 <script setup lang="ts">
 import {ref, watch} from "vue";
 import {Link} from "@inertiajs/vue3";
+import moment from "moment/moment";
 
 let props=defineProps({
     book:{

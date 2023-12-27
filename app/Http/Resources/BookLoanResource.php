@@ -32,6 +32,7 @@ class BookLoanResource extends JsonResource
             'deleted_at' => $this->deleted_at,
             'user' => new UserResource($this->whenLoaded('user')),
             'book' => new BookResource($this->whenLoaded('book')),
+            'addedBy' => new UserResource($this->whenLoaded('addedBy')),
         ];
     }
 }
