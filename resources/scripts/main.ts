@@ -8,7 +8,7 @@ import 'element-plus/dist/index.css'
 axios.defaults.baseURL=import.meta.env.VITE_APP_URL;
 
 createInertiaApp({
-    resolve: (name) => resolvePageComponent(`../views/Pages/${name}.vue`, import.meta.glob('../views/pages/**/*.vue')),
+    resolve: (name) => resolvePageComponent(`../views/pages/${name}.vue`, import.meta.glob('../views/pages/**/*.vue')),
     setup({ el, App, props, plugin }) {
         return createApp({ render: () => h(App, props) })
             .use(ElementPlus)
