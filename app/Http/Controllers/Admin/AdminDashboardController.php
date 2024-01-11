@@ -26,10 +26,12 @@ class AdminDashboardController extends Controller
         $pending=BookLoan::whereStatus(BorrowingStatusEnum::PENDING->value)->count();
         $books=Book::count();
         $users=User::count();
+        $admins=User::role('admin')->count();
+         $customers=User::role('user')->count();
         $pending_loans=BookLoanResource::collection(BookLoan::with(['user','book'])->where('status',BorrowingStatusEnum::PENDING->value)->limit(10)->get());
         return inertia::render('admin/index', compact(
             'loans','borrowed','pending_loans',
-            'delayed','extended','books','users','pending'
+            'delayed','extended','books','users','pending','admins','customers'
         ));
     }
 

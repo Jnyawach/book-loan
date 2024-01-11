@@ -74,7 +74,7 @@ watch([search,showing],debounce(function (){
         </div>
         <div class="flex gap-2">
             <div class="w-96">
-                <input v-model="search" type="search" class="sumo-input" placeholder="Search books by name...">
+                <input v-model="search" type="search" class="sumo-input" placeholder="Search loans by user name...">
             </div>
 
         </div>

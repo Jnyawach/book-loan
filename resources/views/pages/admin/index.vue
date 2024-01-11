@@ -12,6 +12,8 @@ defineProps({
     borrowed:Number,
     users:Number,
     pending:Number,
+    admins:Number,
+    customers:Number,
     pending_loans:{
         type:Object as ()=>any,
         required:true
@@ -86,11 +88,15 @@ const approveLoan=(loan_id:number)=>{
                     </div>
                     <div>
                         <Link href="/admin/users" class="btn-simple btn-medium">view</Link>
+
                     </div>
                 </div>
                 <div class="w-full">
-
                     <h1 class="text-5xl font-bold text-sky-800 my-3">{{users}}</h1>
+                    <div class="flex gap-2">
+                        <h6 class="font-bold text-md">Admins: {{admins}}</h6>
+                        <h6 class="font-bold text-md">Readers: {{customers}}</h6>
+                    </div>
                 </div>
             </div>
 

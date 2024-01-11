@@ -58,7 +58,7 @@ watch([showing, search], debounce(function () {
             </div>
             <div class="flex gap-2">
                 <div class="w-96">
-                    <input v-model="search" type="search" class="sumo-input" placeholder="Search books by name...">
+                    <input v-model="search" type="search" class="sumo-input" placeholder="Search users by name...">
                 </div>
                 <div>
                     <CreateUser>
@@ -94,6 +94,9 @@ watch([showing, search], debounce(function () {
                             <th scope="col" class="px-2 py-3">
                                 Email
                             </th>
+                            <th scope="col" class="px-2 py-3">
+                               Role
+                            </th>
 
                             <th scope="col" class="px-2 py-3 text-end">
                                 Action
@@ -111,6 +114,9 @@ watch([showing, search], debounce(function () {
                             </td>
                             <td class="px-2 py-3">
                                 {{user.email}}
+                            </td>
+                            <td class="px-2 py-3">
+                                {{user.user_role}}
                             </td>
 
                             <td class="px-2 py-3 flex justify-end">

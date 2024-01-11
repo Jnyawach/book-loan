@@ -21,9 +21,7 @@ class AdminUserController extends Controller
     public function index()
     {
         //
-        $users=User::whereHas('roles',function ($query){
-            $query->where('name',RoleEnum::USER->value);
-        })
+        $users=User::query()
             ->when(request('search'),function ($query){
                 $query->where('name','like','%'.request('search').'%')
                     ->orWhere('email','like','%'.request('search').'%');
